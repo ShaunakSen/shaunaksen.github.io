@@ -13092,17 +13092,17 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="StatQuest:-Decision-Trees">StatQuest: Decision Trees<a class="anchor-link" href="#StatQuest:-Decision-Trees">&#182;</a></h3><p><a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">Link</a></p>
 <p>A DT asks a question and classifies based on the answer</p>
-<p><img src = "./data/img/diag1.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag1.png" height="700" width = "700" align="center"></p>
 <p>Note: A classification can be categories or numeric</p>
 <p>In the 2nd case we are using mouse wtto predict mouse size</p>
 <p>More complex DT:</p>
-<p><img src = "./data/img/diag2.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag2.png" height="700" width = "700" align="center"></p>
 <p>It combines numeric data:</p>
-<p><img src = "./data/img/diag3.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag3.png" height="700" width = "700" align="center"></p>
 <p>With Yes/No data:</p>
-<p><img src = "./data/img/diag4.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag4.png" height="700" width = "700" align="center"></p>
 <p>Notice that cut-off for Resting heart rate need not be same on both sides</p>
-<p><img src = "./data/img/diag5.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag5.png" height="700" width = "700" align="center"></p>
 <p>Also order of questions need not be same on both sides</p>
 <p>The final classifications may be repeated</p>
 <p>U start at top and go down till u get to a pt where u cant go further</p>
@@ -13117,24 +13117,24 @@ div#notebook {
 <h4 id="Raw-table-of-data-to-DT:">Raw table of data to DT:<a class="anchor-link" href="#Raw-table-of-data-to-DT:">&#182;</a></h4><p>We want to create a tree that uses <strong>chest pain, good blood circulation, blocked artery status</strong> to predict
 <strong>heart disease(y/n)</strong></p>
 <p>We want to decide which of <strong>chest pain, good blood circulation, blocked artery status</strong> should be root node</p>
-<p><img src = "./data/img/diag6.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag6.png" height="700" width = "700" align="center"></p>
 <p>We start off by exploring how well Chest pain classifies heart disease and build a tree as shown below:</p>
-<p><img src = "./data/img/diag7.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag7.png" height="700" width = "700" align="center"></p>
 <p>We build similar trees for Good Blood Circulation and blocked Artery</p>
-<p><img src = "./data/img/diag8.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag8.png" height="700" width = "700" align="center"></p>
 <p>As shown above we dont kno the BA status for this patient. We skip it but there are other alternatives</p>
 <p>As there are missing values for a feature the total number of patients in each tree is diff</p>
-<p><img src = "./data/img/diag9.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag9.png" height="700" width = "700" align="center"></p>
 <p><strong> because none of the leaf nodes are 100% YES Heart disease or 100% NO they all are considered as "impure"</strong></p>
 <p>To determine which separation is best we need a way to measure and compare impurity</p>
 <h4 id="Gini-method-to-measure-impurity">Gini method to measure impurity<a class="anchor-link" href="#Gini-method-to-measure-impurity">&#182;</a></h4><p>Gini impurity (GI) is calculated for each leaf node as shown below:</p>
-<p><img src = "./data/img/diag10.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag10.png" height="700" width = "700" align="center"></p>
 <p>Similarly we calculate GI for right leaf node</p>
 <p>The leaf nodes do not reppresent same number of patients</p>
 <p>Thus total GI for using Chest pain as root node is the weighted avg of GI of the 2 nodes:</p>
-<p><img src = "./data/img/diag11.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag11.png" height="700" width = "700" align="center"></p>
 <p>Similarly we calculate GI for all 3 possible root nodes</p>
-<p><img src = "./data/img/diag12.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag12.png" height="700" width = "700" align="center"></p>
 <p>Good blood circulation has lowest impurity and it separates the people with or without heart disease the best</p>
 <p>So first node (root) = GBC</p>
 <p>After the split we get 2 leaf nodes</p>
@@ -13147,23 +13147,23 @@ div#notebook {
 <p>We do same for Blocked Artery</p>
 <p>GI for BA = 2.9</p>
 <p>This is less than GI for CP and also less than GI for GBC</p>
-<p><img src = "./data/img/diag13.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag13.png" height="700" width = "700" align="center"></p>
 <p>Thus we use BA in the left part</p>
 <p>Resulting tree:</p>
-<p><img src = "./data/img/diag14.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag14.png" height="700" width = "700" align="center"></p>
 <p>Now we will use CP to try and separate the L-&gt;L node(24/25)</p>
 <p>These are the patients with GBC = true and BA = true</p>
 <p>CP does a good job in separating the patients:</p>
-<p><img src = "./data/img/diag15.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag15.png" height="700" width = "700" align="center"></p>
 <p>Now we look at node in Root-&gt;L-&gt;R (13/102)</p>
 <p>Lets try and use CP to divide these 115 patients</p>
 <p>Note : <strong> Vast majority (89%) of patients in this node dont have heart disease</strong></p>
-<p><img src = "./data/img/diag16.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag16.png" height="700" width = "700" align="center"></p>
 <p>After separating we get a higher GI than before separating</p>
 <p>So we make this node a leaf node</p>
-<p><img src = "./data/img/diag17.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag17.png" height="700" width = "700" align="center"></p>
 <p>We have built the entire LHS of the tree</p>
-<p><img src = "./data/img/diag18.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag18.png" height="700" width = "700" align="center"></p>
 <p>For RHS we follow same steps:</p>
 <ol>
 <li><p>Calculate all GI scores</p>
@@ -13174,7 +13174,7 @@ div#notebook {
 </li>
 </ol>
 <p>Complete tree:</p>
-<p><img src = "./data/img/diag18.1.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag18.1.png" height="700" width = "700" align="center"></p>
 
 </div>
 </div>
@@ -13183,23 +13183,23 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Numeric-data-in-DT:">Numeric data in DT:<a class="anchor-link" href="#Numeric-data-in-DT:">&#182;</a></h4><p>Imagine if our features were numeric not just Y/N:</p>
-<p><img src = "./data/img/diag19.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag19.png" height="700" width = "700" align="center"></p>
 <ol>
 <li>Sort patients by wt (lowest to highest)</li>
 </ol>
-<p><img src = "./data/img/diag20.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag20.png" height="700" width = "700" align="center"></p>
 <ol>
 <li><p>Calculate avg wts for all adjacent patients</p>
 </li>
 <li><p>Calculate GI for each avg wt</p>
 </li>
 </ol>
-<p><img src = "./data/img/diag21.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag21.png" height="700" width = "700" align="center"></p>
 <p>In the above diag GI is calculated for wt &lt; 167.5</p>
 <ol>
 <li>The lowest GI occurs when wt &lt; 205 (GI=0.27)</li>
 </ol>
-<p><img src = "./data/img/diag22.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag22.png" height="700" width = "700" align="center"></p>
 <p>So this is the cutoff that we will use when we compare wt to CP or BA</p>
 
 </div>
@@ -13250,20 +13250,20 @@ div#notebook {
 <p><strong> They work great with the data used to create them but are not flexible when it comes to classifying
 new samples</strong></p>
 <p>RF combines simplicity of DTs with flexibility resulting in a vast improvement in accuracy</p>
-<h4 id="Step-1-:-Create-a-&quot;bootstrapped&quot;-dataset">Step 1 : Create a "bootstrapped" dataset<a class="anchor-link" href="#Step-1-:-Create-a-&quot;bootstrapped&quot;-dataset">&#182;</a></h4><p><img src = "./data/img/diag23.png" height="700" width = "700" align="center"></p>
+<h4 id="Step-1-:-Create-a-&quot;bootstrapped&quot;-dataset">Step 1 : Create a "bootstrapped" dataset<a class="anchor-link" href="#Step-1-:-Create-a-&quot;bootstrapped&quot;-dataset">&#182;</a></h4><p><img src = "./DT_and_RF_files/img/diag23.png" height="700" width = "700" align="center"></p>
 <p>Say these 4 samples are entire dataset</p>
 <p>To create a bootstrapped dataset that is same size as original we randomly select samples from original dataset</p>
 <p><strong>We are allowed to pick the same sample more than once</strong></p>
 <p>Say first sample in original dataset = S1</p>
 <p>We create bootstrap dataset as: <strong>S2, S1, S4, S4</strong></p>
-<p><img src = "./data/img/diag24.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag24.png" height="700" width = "700" align="center"></p>
 <h4 id="Step-2:-Create-a-DT-using-Bootstrapped-dataset-but-only-use-a-random-subset-of-vars-(columns)-at-each-step">Step 2: Create a DT using Bootstrapped dataset but only use a random subset of vars (columns) at each step<a class="anchor-link" href="#Step-2:-Create-a-DT-using-Bootstrapped-dataset-but-only-use-a-random-subset-of-vars-(columns)-at-each-step">&#182;</a></h4><p>In this example we will consider 2 vars at each step</p>
 <p>Thus instead of considering all 4 vars (CP, GBC, BA, Wt) to figure out how to split the root node we randomly select 2 : GBC, BA</p>
 <p>Say GBC did the best job at separating the samples</p>
 <p>We used GBC, we grey it out, so that we can focus on rem vars</p>
-<p><img src = "./data/img/diag25.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag25.png" height="700" width = "700" align="center"></p>
 <p>Now we have to figure out how to select vars for circled node:</p>
-<p><img src = "./data/img/diag26.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag26.png" height="700" width = "700" align="center"></p>
 <p>Just like for the root we randomly select 2 vars from (CP, BA, wt)</p>
 <p>We select CP and wt</p>
 <p>Thus we build the tree by:</p>
@@ -13277,7 +13277,7 @@ new samples</strong></p>
 <p>Now we make a new bootstrapped dataset and build tree considering a random subset of vars at each step</p>
 <p>Ideally we do this 100s of times</p>
 <p>considering a random subset of vars at each step</p>
-<p><img src = "./data/img/diag27.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag27.png" height="700" width = "700" align="center"></p>
 <p>Because of the randomness associated with creating the bootsrapped dataset and also due to choosing random columns for each step, RF results in a <strong> wide variety of DTs</strong></p>
 <p>This variety makes RF more effevtive that DTs</p>
 
@@ -13292,7 +13292,7 @@ new samples</strong></p>
 <p>We take data and run down 1st tree</p>
 <p>Output: Yes</p>
 <p>We keep track of this result</p>
-<p><img src = "./data/img/diag28.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag28.png" height="700" width = "700" align="center"></p>
 <p>Similarly we run data thru 2nd... last tree</p>
 <p>We keep track of the results and see which option received most votes</p>
 <p>Here Yes: 5 No : 1</p>
@@ -13306,7 +13306,7 @@ new samples</strong></p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Test-accuracy-of-a-RF">Test accuracy of a RF<a class="anchor-link" href="#Test-accuracy-of-a-RF">&#182;</a></h4><p>When we created the bootstrapped dataset we allowed duplicate entries in the bootstrapped dataset</p>
-<p><img src = "./data/img/diag29.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag29.png" height="700" width = "700" align="center"></p>
 <p>As a result above entry was not included in the bootstrapped dataset</p>
 <blockquote><p>Typically about 1/3 the original data does not end up in the bootstrapped dataset</p>
 </blockquote>
@@ -13318,7 +13318,7 @@ new samples</strong></p>
 <p>Result : No</p>
 <p>Similarly we run throuugh all trees and keep track of the results</p>
 <p>Then we chose the most common result: Here it is correct and = No</p>
-<p><img src = "./data/img/diag30.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag30.png" height="700" width = "700" align="center"></p>
 <p>We repeat the process for all OoB samples for all trees</p>
 <p>Some may be incorrectly labeled</p>
 <p><strong>Accuracy</strong>: Proportion of OoB Samples that were correctly claasified by the RF</p>
@@ -13339,7 +13339,7 @@ new samples</strong></p>
 <li><p>Estimate accuracy of RF</p>
 </li>
 </ul>
-<p><img src = "./data/img/diag31.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag31.png" height="700" width = "700" align="center"></p>
 <p>We used 2 vars to make a decision at each step</p>
 <p>Now we can compare OoB Error for RF built using 2vars per step to a RF built using 3 vars per step</p>
 <p>We can test many diff settings and chose the most accurate RF</p>
@@ -13365,7 +13365,7 @@ new samples</strong></p>
 <h3 id="StatQuest:-Random-Forests-Part-2:-Missing-data-and-clustering">StatQuest: Random Forests Part 2: Missing data and clustering<a class="anchor-link" href="#StatQuest:-Random-Forests-Part-2:-Missing-data-and-clustering">&#182;</a></h3><p><a href="https://www.youtube.com/watch?v=nyxTdL_4Q-Q">Link</a></p>
 <p>Lets see how RF deals with missing data</p>
 <p>Missing data can be of 2 types:</p>
-<p><img src = "./data/img/diag32.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag32.png" height="700" width = "700" align="center"></p>
 <ul>
 <li>Missing data can be in original dataset</li>
 <li>It may be in a new sample we want to categorize</li>
@@ -13376,7 +13376,7 @@ new samples</strong></p>
 <p>We make an initial guess that mey be bad and gradually refine the guess until it (hopefully) gets good</p>
 <p>Initial guess for BA = most common value = No</p>
 <p>Since wt is numeric our initial guess is the median val = 180</p>
-<p><img src = "./data/img/diag33.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag33.png" height="700" width = "700" align="center"></p>
 <p>This is the dataset with the initial guesses</p>
 <p>Now we want to refine our guesses</p>
 <p>We do this by <strong> detemining which samples are similar to the one with the missing data</strong></p>
@@ -13387,41 +13387,41 @@ new samples</strong></p>
 </li>
 </ol>
 <p>Lets start by running all of the data down the 1st tree:</p>
-<p><img src = "./data/img/diag34.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag34.png" height="700" width = "700" align="center"></p>
 <p>Say sample 3 and 4 ended up in the same leaf node</p>
 <p>That means they are <strong>simialar (that is how similarity is defined in RF)</strong></p>
 <p>We keep track of similar samples using a <strong>Proximity Matrix</strong></p>
 <p>The PM has a row foreach sample and a col for each sample</p>
-<p><img src = "./data/img/diag35.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag35.png" height="700" width = "700" align="center"></p>
 <p>As samples 3 and 4 are similar we put 1 there</p>
 <p>Similarly we run all of the data down the 2nd tree</p>
-<p><img src = "./data/img/diag36.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag36.png" height="700" width = "700" align="center"></p>
 <p>Now samples 2, 3 and 4 all ended up in the same leaf nodes</p>
 <p>PM now:</p>
-<p><img src = "./data/img/diag37.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag37.png" height="700" width = "700" align="center"></p>
 <p>We add 1 as the pairs come in smae leaf node again</p>
 <p>We run all the data down the 3rd tree</p>
 <p>Updated PM:</p>
-<p><img src = "./data/img/diag38.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag38.png" height="700" width = "700" align="center"></p>
 <p>Ultimately, we run the data down all the trees and the PM fills in</p>
-<p><img src = "./data/img/diag39.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag39.png" height="700" width = "700" align="center"></p>
 <p>Then we divide each proximity value by total number of trees (say we had 10 trees)</p>
 <p>Updated PM:</p>
-<p><img src = "./data/img/diag40.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag40.png" height="700" width = "700" align="center"></p>
 <p>Now we can use the proximity values for sample 4 to make better guesses about the missing data</p>
 <p>For BA we calculate the weighted freq of Y and N using prox values as wts</p>
-<p><img src = "./data/img/diag41.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag41.png" height="700" width = "700" align="center"></p>
 <p>Calculations:</p>
 <blockquote><p>Freq of Yes = 1/3</p>
 <p>Freq of No = 2/3</p>
 <p>The wighted freq of Yes = Freq of Yes * The weight for Yes</p>
 <p>The weight for Yes = (Proximity of Yes)/(All proximities)</p>
 </blockquote>
-<p><img src = "./data/img/diag42.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag42.png" height="700" width = "700" align="center"></p>
 <blockquote><p>The proximity for Yes = Proximity value for sample 2 (the only one with Yes)</p>
 <p>We divide that by sum of proximities for sample 4</p>
 </blockquote>
-<p><img src = "./data/img/diag43.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag43.png" height="700" width = "700" align="center"></p>
 <blockquote><p>The weight for Yes = 0.1/(0.1 + 0.1 + 0.8) = 0.1</p>
 <p>The wighted freq of Yes = 1/3 * 0.1 = 0.03</p>
 </blockquote>
@@ -13437,13 +13437,13 @@ new samples</strong></p>
 <blockquote><p>Weighted avg = (wt of sample 1 <em> wt avg wt of sample 1) + (wt of sample 2 </em> wt avg wt of sample 2) + (wt of sample 3 * wt avg wt of sample 3)</p>
 <p>wt avg wt of sample 1 = (proximity of sample 1) / (sum of proximities) = 0.1 / (0.1 + 0.1 + 0.8) = 0.1</p>
 </blockquote>
-<p><img src = "./data/img/diag44.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag44.png" height="700" width = "700" align="center"></p>
 <p>Similarly we calculate wt avg wt of sample 2 and wt avg wt of sample 3</p>
 <blockquote><p>Weighted avg = (125 <em> 0.1) + (180 </em> 0.1) + (210 * 0.8) = 198.5</p>
 </blockquote>
 <p>wts used to calculate the weighted avg is based on proximities</p>
 <p>So we fill missing val as 198.5</p>
-<p><img src = "./data/img/diag45.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag45.png" height="700" width = "700" align="center"></p>
 <p>Now that we have revised our guesses a little bit, we do the whole thing over again..</p>
 <ul>
 <li>we build a RF</li>
@@ -13460,22 +13460,22 @@ new samples</strong></p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Super-Cool-stuff-with-the-PM:">Super Cool stuff with the PM:<a class="anchor-link" href="#Super-Cool-stuff-with-the-PM:">&#182;</a></h4><p><img src = "./data/img/diag46.png" height="700" width = "700" align="center"></p>
+<h4 id="Super-Cool-stuff-with-the-PM:">Super Cool stuff with the PM:<a class="anchor-link" href="#Super-Cool-stuff-with-the-PM:">&#182;</a></h4><p><img src = "./DT_and_RF_files/img/diag46.png" height="700" width = "700" align="center"></p>
 <p>We have already seen this PM</p>
 <p>This is the PM b4 we divided each value by 10</p>
 <p>If samples 3 and 4 ended up in the same leaf node for all 10 trees:</p>
-<p><img src = "./data/img/diag47.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag47.png" height="700" width = "700" align="center"></p>
 <p>We divide each number by 10</p>
 <p>For Samples 3 and 4 the entry will be 1</p>
 <p>1 in PM =&gt; samples are as close as they can be</p>
 <p>Also</p>
 <p>1 - prox value = distance</p>
-<p><img src = "./data/img/diag48.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag48.png" height="700" width = "700" align="center"></p>
 <p>Thus it is possible to derive a <strong> Distance Matrix </strong> from the PM</p>
 <p>Getting distance matrix (which is similar to corr matrix) means we can plot <strong>Heat Maps</strong></p>
-<p><img src = "./data/img/diag49.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag49.png" height="700" width = "700" align="center"></p>
 <p>We can also draw <strong>MDS Plots</strong></p>
-<p><img src = "./data/img/diag50.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag50.png" height="700" width = "700" align="center"></p>
 <hr>
 
 </div>
@@ -13486,21 +13486,21 @@ new samples</strong></p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Missing-data-in-new-sample-that-we-want-to-categorize">Missing data in new sample that we want to categorize<a class="anchor-link" href="#Missing-data-in-new-sample-that-we-want-to-categorize">&#182;</a></h4><p>Imagine that we have already built a RF and we wanted to classify a new patient</p>
 <p>But the patient has missing data for BA</p>
-<p><img src = "./data/img/diag51.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag51.png" height="700" width = "700" align="center"></p>
 <p>We dont know if patient has BA</p>
 <p>So we need to make a guess about BA so that we can run the patient down all the trees in the forest</p>
 <ol>
 <li>Create 2 copies of the data (Yes and No for Heart Disease </li>
 </ol>
-<p><img src = "./data/img/diag52.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag52.png" height="700" width = "700" align="center"></p>
 <ol>
 <li>Then we use the iterative method discussed about to make a good guess about the misssing values</li>
 </ol>
-<p><img src = "./data/img/diag53.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag53.png" height="700" width = "700" align="center"></p>
 <ol>
 <li>These are the guesses that we came up with:</li>
 </ol>
-<p><img src = "./data/img/diag54.png" height="700" width = "700" align="center"></p>
+<p><img src = "./DT_and_RF_files/img/diag54.png" height="700" width = "700" align="center"></p>
 <ol>
 <li><p>Then we run the 2 samples down the trees in the forest</p>
 </li>
